@@ -21,3 +21,9 @@ def is_divisible(n, x, y):
 def list_and_reverse(number):
     """Returns a reversed list from number's digits"""
     return [int(digit) for digit in str(number)[::-1]]
+
+
+def draw_stairs(steps):
+    """Return a string looks like a stair-like art in console output"""
+    return '\n'.join(['%*s' % (step + 1, 'I') for step in range(steps)])
+
