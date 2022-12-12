@@ -66,3 +66,53 @@ def hexrgb(r, g, b):
 
     return '{:02X}{:02X}{:02X}'.format(limit(r), 
     limit(g), limit(b))
+
+
+def rot13(message):
+    """Return an encrypted message with the ROT13 cipher"""
+    letters = 'abcdefghijklmnopqrstuvwxyz'
+
+    def make_letter(symbol):
+        if symbol.islower():
+            return letters[(letters.find(symbol) + 13) % 26]
+        else:
+            return letters[(letters.find(symbol.lower()) + 13) % 26].upper()
+
+    return ''.join(make_letter(letter) if letter.isalpha() else letter for
+        letter in message)
+
+
+def max_sequence(array):
+    """Find first subarray with max sum of elements.
+
+    Returns [subsequence, sum of subsequences elements, start index and end index]
+    
+    Returns 0 if array consist only of negative integers or empty"""
+    if len(array) == 0:
+        return 0
+    if max(array) < 0:
+        return 0
+
+    start = end = 0
+    max_sum_start = max_sum_end = start
+
+    current_sum = max_sum = array[start]
+
+    while end < len(array):
+        current_sum += array[end]
+
+        if current_sum < 0:
+            current_sum = 0
+            start = end + 1
+            end = start
+        elif current_sum > max_sum:
+            max_sum = current_sum
+            max_sum_start = start
+            max_sum_end = end
+            end += 1
+        else:
+            end += 1
+
+    founded_array = array[max_sum_start : max_sum_end + 1]
+
+    return [founded_array, max_sum, max_sum_start, max_sum_end]
