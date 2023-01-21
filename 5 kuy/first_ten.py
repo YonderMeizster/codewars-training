@@ -116,3 +116,11 @@ def max_sequence(array):
     founded_array = array[max_sum_start : max_sum_end + 1]
 
     return [founded_array, max_sum, max_sum_start, max_sum_end]
+
+
+def order_weitht(weights : str):
+    """Returns weights sorted in ascending order by the sum of the
+    digits or by their own string representation."""
+    def sorting(a : str, b : str):
+        return int(a) > int(b) if int(a) != int(b) else a > b
+    
